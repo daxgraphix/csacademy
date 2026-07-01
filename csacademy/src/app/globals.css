@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 7 11 20;
+    --foreground: 241 245 249;
+    --card: 19 29 49;
+    --card-foreground: 241 245 249;
+    --popover: 13 20 36;
+    --popover-foreground: 241 245 249;
+    --primary: 6 182 212;
+    --primary-foreground: 7 11 20;
+    --secondary: 19 29 49;
+    --secondary-foreground: 241 245 249;
+    --muted: 30 45 71;
+    --muted-foreground: 148 163 184;
+    --accent: 124 58 237;
+    --accent-foreground: 241 245 249;
+    --destructive: 239 68 68;
+    --destructive-foreground: 241 245 249;
+    --border: 30 45 71;
+    --input: 19 29 49;
+    --ring: 6 182 212;
+    --font-space-grotesk: "Space Grotesk", system-ui, sans-serif;
+    --font-inter: "Inter", system-ui, sans-serif;
+    --font-jetbrains: "JetBrains Mono", monospace;
+  }
+
+  * { @apply border-border; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-space-900 text-slate-100 font-body;
+    background-color: #070B14;
+    font-family: var(--font-inter);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk);
+    @apply font-semibold;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-jetbrains);
+  }
+}
+
+@layer components {
+  /* Glowing cyber border */
+  .cyber-border {
+    @apply border border-cyber-500/30 shadow-cyber;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .cyber-border:hover {
+    @apply border-cyber-500/60 shadow-cyber-lg;
+  }
+
+  /* XP glow animation */
+  .xp-glow {
+    @apply text-amber-400;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+  }
+
+  /* Streak fire text */
+  .streak-glow {
+    @apply text-red-400;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  }
+
+  /* Glass card effect */
+  .glass-card {
+    background: rgba(19, 29, 49, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 45, 71, 0.8);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyber-400 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #070B14; }
+  ::-webkit-scrollbar-thumb { background: #1E2D47; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #06B6D4; }
+
+  /* Learning card swipe animations */
+  .card-exit-left  { animation: exit-left 0.3s ease-in forwards; }
+  .card-exit-right { animation: exit-right 0.3s ease-in forwards; }
+  .card-enter      { animation: card-enter 0.3s ease-out forwards; }
+
+  /* Shimmer loading */
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Day node states */
+  .day-node-complete { @apply bg-cyber-500/20 border-cyber-500 text-cyber-400; }
+  .day-node-active   { @apply bg-purple-500/20 border-purple-500 text-purple-300 animate-glow-pulse; }
+  .day-node-locked   { @apply bg-space-800/50 border-border text-slate-600; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* Hide scrollbar but keep scroll */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* Keyframes */
+@keyframes exit-left  { to { transform: translateX(-120%) rotate(-15deg); opacity: 0; } }
+@keyframes exit-right { to { transform: translateX(120%)  rotate(15deg);  opacity: 0; } }
+@keyframes card-enter { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes shimmer    { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes float      { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* Quiz answer states */
+.quiz-option-correct  { @apply border-green-500 bg-green-500/10 text-green-300 !important; }
+.quiz-option-wrong    { @apply border-red-500   bg-red-500/10   text-red-300   !important; }
+.quiz-option-selected { @apply border-cyber-500 bg-cyber-500/10 text-cyber-300 !important; }
